@@ -7,6 +7,8 @@
 <link rel="stylesheet" href="assets/css/app.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<script src="assets/js/idb.js"></script>
+<script src="assets/js/db.js"></script>
 <script src="assets/js/converter.js"></script>
 <style>
 html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
@@ -64,6 +66,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   <form class="w3-container">
     <div class="w3-row-padding">
       <div class="w3-half w3-margin-bottom">
+        <h3>Base</h3>
         <div class="w3-col s3 m3 l3 w3-center">
           <button id="base-btn" class="w3-button w3-circle w3-black" style="width: 60px; height: 60px; outline: none;">USD</button>
         </div>
@@ -72,6 +75,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
         </div>
       </div>
       <div class="w3-half w3-margin-bottom">
+        <h3>Target</h3>
         <div class="w3-col s3 m3 l3 w3-center">
           <button id="target-btn" class="w3-button w3-circle w3-black" style="width: 60px; height: 60px; outline: none;">NGN</button>
         </div>
@@ -181,10 +185,12 @@ function w3_close() {
     console.log("DOM fully loaded and parsed")
     window.base = 'USD'
     window.target = 'NGN'
-    const converter = new Converter()
+    let amount = 1
+    const database = new Database ()
+    const converter = new Converter(amount, database)
     converter.currencies()
     converter.convert()
-    let amount
+    
     document.getElementById('base-input').onkeypress = (e) => {
       amount = e.target.value
     }
@@ -206,10 +212,12 @@ function w3_close() {
     }
 
     document.getElementById("convert-btn").onclick = function(e) {
-      const converter = new Converter(amount)
+      console.log(amount)
+      const converter = new Converter(amount, database)
       converter.convert()
       e.preventDefault()
     }
+
   })
 </script>
 

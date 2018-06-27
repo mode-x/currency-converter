@@ -1,8 +1,13 @@
 class Converter {
-  constructor (amount = 1) {
+  constructor (amount, database) {
     this.base = window.base
     this.target = window.target
+    this.first_pair = `${this.base}_${this.target}`
+    this.second_pair = `${this.target}_${this.base}`
     this.amount = amount
+    this.database = database
+    this.exchange_pairs = null
+    this.rate = 0
   }
   
   currencies () {
@@ -762,19 +767,43 @@ class Converter {
     })
   }
 
-  convert () {
-    const firstPair = `${this.base}_${this.target}`
-    const secondPair = `${this.target}_${this.base}`
-    const url = `https://free.currencyconverterapi.com/api/v5/convert?q=${firstPair},${secondPair}&compact=ultra`
+  fetchRateAndStore () {
+    const url = `https://free.currencyconverterapi.com/api/v5/convert?q=${this.first_pair},${this.second_pair}&compact=ultra`
     fetch(url)
       .then((response) => {
         return response.json()
       })
       .then((pairs) => {
-        document.getElementById('first-conversion-rate').innerText = `${firstPair.replace('_', ' => ')} = ${pairs[firstPair]}`
-        document.getElementById('second-conversion-rate').innerText = `${secondPair.replace('_', ' => ')} = ${pairs[secondPair]}`
-        console.log(this.amount)
-        document.getElementById('target-input').value = pairs[firstPair] * this.amount
+        this.exchange_pairs = pairs
+        this.rate = pairs[this.first_pair]
+        this.display()
+        this.database.insert({id: `${this.first_pair}/${this.second_pair}`, pairs: pairs, time: new Date().toISOString()})
       })
+  }
+
+  convert () {
+    // Check if exists in indexedDB
+    const _firstPair = `${this.first_pair}/${this.second_pair}`
+    const _secondPair = `${this.second_pair}/${this.first_pair}`
+    const pairsPromise = []
+    for (const pair of [_firstPair, _secondPair]) {
+      pairsPromise.push(this.database.checkPair(pair))
+    }
+    return Promise.all(pairsPromise).then((values) => {
+      const result = values.filter(value => value !== undefined)
+      if (result.length === 0) {
+        this.fetchRateAndStore()
+      } else {
+        this.rate = result[0].pairs[this.first_pair]
+        this.exchange_pairs = result[0].pairs
+        this.display()
+      }
+    })
+  }
+
+  display () {
+    document.getElementById('first-conversion-rate').innerText = `${this.first_pair.replace('_', ' => ')} = ${this.exchange_pairs[this.first_pair]}`
+    document.getElementById('second-conversion-rate').innerText = `${this.second_pair.replace('_', ' => ')} = ${this.exchange_pairs[this.second_pair]}`
+    document.getElementById('target-input').value = this.rate * this.amount
   }
 }
