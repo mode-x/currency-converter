@@ -743,13 +743,14 @@ class Converter {
         }
       }
     }
+    console.log(currenciesStore.results)
     const options = Object.keys(currenciesStore.results).sort()
     const ul = document.getElementById("currency-container") 
     ul.innerHTML = ""
     // Populate list with options:
     for(const option of options) {
       let li = document.createElement("li")
-      li.appendChild(document.createTextNode(option))
+      li.appendChild(document.createTextNode(`${option},  ${currenciesStore.results[option].currencyName}`))
       ul.appendChild(li)
     }
     ul.addEventListener("click", (e) => {
@@ -758,11 +759,11 @@ class Converter {
         const value = e.target.textContent
         document.getElementById('id01').style.display='none'
         if (btnId.split('-')[0] === 'base') {
-          window.base = value
+          window.base = value.split(',')[0]
         } else if (btnId.split('-')[0] === 'target') {
-          window.target = value
+          window.target = value.split(',')[0]
         }
-        document.getElementById(btnId).innerText = value
+        document.getElementById(btnId).innerText = value.split(',')[0]
       }
     })
   }
