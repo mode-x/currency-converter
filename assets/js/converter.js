@@ -743,7 +743,6 @@ class Converter {
         }
       }
     }
-    console.log(currenciesStore.results)
     const options = Object.keys(currenciesStore.results).sort()
     const ul = document.getElementById("currency-container") 
     ul.innerHTML = ""
