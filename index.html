@@ -148,7 +148,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
 // SW
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/sw.js').then(function(registration) {
+    navigator.serviceWorker.register('./sw.js').then(function(registration) {
       // Registration was successful
       console.log('ServiceWorker registration successful with scope: ', registration.scope);
     }, function(err) {
@@ -212,7 +212,6 @@ function w3_close() {
     }
 
     document.getElementById("convert-btn").onclick = function(e) {
-      console.log(amount)
       const converter = new Converter(amount, database)
       converter.convert()
       e.preventDefault()
