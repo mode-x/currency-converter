@@ -14,6 +14,7 @@ class Converter {
     caches.open('app-cache-v1').then((cache) => {
       cache.match('https://free.currencyconverterapi.com/api/v5/currencies')
         .then((response) => {
+          if (!response) return
           return response.json()
         })
         .then((response) => {
