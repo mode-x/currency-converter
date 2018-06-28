@@ -19,6 +19,7 @@ class Converter {
           }
         })
         .then((response) => {
+          if (!response === null || !response === undefined) return
           const options = Object.keys(response.results).sort()
           const ul = document.getElementById('currency-container') 
           ul.innerHTML = ''
