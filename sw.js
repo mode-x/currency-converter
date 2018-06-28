@@ -1,14 +1,20 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
   './index.html',
-  'https://ssl.google-analytics.com/ga.js'
+  '../assets/css/w3.css',
+  '../assets/css/app.css',
+  '../assets/js/initializer.js',
+  '../assets/js/idb.js',
+  '../assets/js/db.js',
+  '../assets/js/converter.js',
+  'https://fonts.googleapis.com/css?family=Gothic+A1',
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 ]
 
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
-        console.log('Opened cache')
         return cache.addAll(urlsToCache)
       })
   )
