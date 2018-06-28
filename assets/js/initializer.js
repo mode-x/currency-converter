@@ -30,8 +30,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let amount = 1
   const database = new Database ()
   const converter = new Converter(amount, database)
-  converter.currencies()
-  converter.convert()
+  // converter.currencies()
+  // converter.convert()
 
   document.getElementById('notify').style.display = 'none'
   
