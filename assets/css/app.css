@@ -5,3 +5,7 @@ input:invalid {
 input:valid {
   border: 2px solid black;
 }
+
+#target-input {
+  border: 2px solid black;
+}
