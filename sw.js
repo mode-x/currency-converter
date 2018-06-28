@@ -1,6 +1,7 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
-  './index.html'
+  './index.html',
+  'https://ssl.google-analytics.com/ga.js'
 ]
 
 self.addEventListener('install', function(event) {
