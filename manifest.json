@@ -4,7 +4,7 @@
   "theme_color": "#000000",
   "background_color": "#ffffff",
   "display": "browser",
-  "Scope": "/",
+  "scope": "/",
   "start_url": "/",
   "description": "XEX is a handy app used for currency conversion and it works either online and offline.",
   "lang": "en-US",
