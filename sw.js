@@ -1,15 +1,15 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
-  '/',
-  '../assets/css/w3.css',
-  '../assets/css/app.css',
-  '../assets/js/initializer.js',
-  '../assets/js/idb.js',
-  '../assets/js/db.js',
-  '../assets/js/converter.js',
-  'https://fonts.googleapis.com/css?family=Gothic+A1',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
-  'https://free.currencyconverterapi.com/api/v5/currencies'
+  '/'
+  // '../assets/css/w3.css',
+  // '../assets/css/app.css',
+  // '../assets/js/initializer.js',
+  // '../assets/js/idb.js',
+  // '../assets/js/db.js',
+  // '../assets/js/converter.js',
+  // 'https://fonts.googleapis.com/css?family=Gothic+A1',
+  // 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+  // 'https://free.currencyconverterapi.com/api/v5/currencies'
 ]
 
 self.addEventListener('install', (event) => {
