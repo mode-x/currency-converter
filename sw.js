@@ -22,22 +22,17 @@ self.addEventListener('install', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
-  console.log(event.request)
+  let requestUrl = new URL(event.request.url)
+  if (requestUrl.origin === location.origin) {
+    if (requestUrl.pathname === '/') {
+      event.respondWith(caches.match('/skeleton'))
+      return
+    }
+  }
+  
   event.respondWith(
     caches.match(event.request).then((response) => {
       return response || fetch(event.request)
-        .then((response) => {
-          // if (response === undefined) {
-          // } else if (response.status === 403) {
-          //   return fetch('/static/nkatar_logo.png')
-          // } else if (response.status === 404) {
-          //   return fetch('/static/nkatar_logo.png')
-          // }
-          return response
-        })
-        .catch((error) => {
-          console.log(error)
-        })
     })
   )
 })
