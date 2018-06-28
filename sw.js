@@ -1,6 +1,6 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
-  '/'
+  '/currency-converter/'
   // '../assets/css/w3.css',
   // '../assets/css/app.css',
   // '../assets/js/initializer.js',
