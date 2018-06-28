@@ -8,7 +8,8 @@ const urlsToCache = [
   '/assets/js/db.js',
   '/assets/js/converter.js',
   'https://fonts.googleapis.com/css?family=Gothic+A1',
-  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
+  'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+  'https://free.currencyconverterapi.com/api/v5/currencies'
 ]
 
 self.addEventListener('install', (event) => {

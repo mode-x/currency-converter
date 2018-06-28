@@ -3,6 +3,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
   // if (!window.location.hostname === '127.0.0.1') {
   //   window.location.replace(`${window.location.hostname}/index.html`)
   // }
+
+  let installPromptEvent
+
+  window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault()
+    installPromptEvent = event
+    document.querySelector('#install-button').disabled = false
+  })
+
+  document.getElementById('install-button').addEventListener('click', () => {
+    document.querySelector('#install-button').disabled = true
+    installPromptEvent.prompt()
+    installPromptEvent.userChoice.then((choice) => {
+      if (choice.outcome === 'accepted') {
+        console.log('User accepted the A2HS prompt')
+      } else {
+        console.log('User dismissed the A2HS prompt')
+      }
+      installPromptEvent = null;
+    })
+  })
+
   window.base = 'USD'
   window.target = 'NGN'
   let amount = 1
