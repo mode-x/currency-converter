@@ -44,6 +44,8 @@ class Converter {
                 document.getElementById(btnId).innerText = value
               }
             })
+          } else {
+            
           }
         })
     })
