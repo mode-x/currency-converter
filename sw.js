@@ -1,6 +1,6 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
-  '/app_shell.html',
+  './app_shell.html',
   'assets/css/w3.css',
   'assets/css/app.css',
   'assets/js/initializer.js',
@@ -25,7 +25,7 @@ self.addEventListener('fetch', (event) => {
   let requestUrl = new URL(event.request.url)
   if (requestUrl.origin === location.origin) {
     if (requestUrl.pathname === '/currency-converter/') {
-      event.respondWith(caches.match('/app_shell.html'))
+      event.respondWith(caches.match('./app_shell.html'))
       return
     }
   }
