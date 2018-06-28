@@ -24,7 +24,7 @@ self.addEventListener('install', (event) => {
 self.addEventListener('fetch', (event) => {
   let requestUrl = new URL(event.request.url)
   if (requestUrl.origin === location.origin) {
-    if (requestUrl.pathname === '/') {
+    if (requestUrl.pathname === '/currency-converter/') {
       event.respondWith(caches.match('app_shell/'))
       return
     }
