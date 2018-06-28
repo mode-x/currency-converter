@@ -14,39 +14,33 @@ class Converter {
     caches.open('app-cache-v1').then((cache) => {
       cache.match('https://free.currencyconverterapi.com/api/v5/currencies')
         .then((response) => {
-          if (!response === null || !response === undefined) {
-            return response.json()
-          }
+          return response.json()
         })
         .then((response) => {
-          if (!response === null || !response === undefined) {
-            const options = Object.keys(response.results).sort()
-            const ul = document.getElementById('currency-container') 
-            ul.innerHTML = ''
-            // Populate list with options:
-            for(const option of options) {
-              let li = document.createElement('li')
-              li.appendChild(document.createTextNode(`${option},  ${response.results[option].currencyName}`))
-              ul.appendChild(li)
-            }
-            ul.addEventListener('click', (e) => {
-              if (e.target && e.target.nodeName === 'LI') {
-                const btnId = window.initiatorValue
-                const value = e.target.textContent.split(',')[0]
-                document.getElementById('id01').style.display='none'
-                if (btnId.split('-')[0] === 'base') {
-                  document.getElementById('convert-text').innerHTML = ` Convert ${value} to ${document.getElementById('target-btn').textContent}`
-                  window.base = value
-                } else if (btnId.split('-')[0] === 'target') {
-                  document.getElementById('convert-text').innerHTML = ` Convert ${document.getElementById('base-btn').textContent} to ${value}`
-                  window.target = value
-                }
-                document.getElementById(btnId).innerText = value
-              }
-            })
-          } else {
-            
+          const options = Object.keys(response.results).sort()
+          const ul = document.getElementById('currency-container') 
+          ul.innerHTML = ''
+          // Populate list with options:
+          for(const option of options) {
+            let li = document.createElement('li')
+            li.appendChild(document.createTextNode(`${option},  ${response.results[option].currencyName}`))
+            ul.appendChild(li)
           }
+          ul.addEventListener('click', (e) => {
+            if (e.target && e.target.nodeName === 'LI') {
+              const btnId = window.initiatorValue
+              const value = e.target.textContent.split(',')[0]
+              document.getElementById('id01').style.display='none'
+              if (btnId.split('-')[0] === 'base') {
+                document.getElementById('convert-text').innerHTML = ` Convert ${value} to ${document.getElementById('target-btn').textContent}`
+                window.base = value
+              } else if (btnId.split('-')[0] === 'target') {
+                document.getElementById('convert-text').innerHTML = ` Convert ${document.getElementById('base-btn').textContent} to ${value}`
+                window.target = value
+              }
+              document.getElementById(btnId).innerText = value
+            }
+          })
         })
     })
   }
