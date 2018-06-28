@@ -65,26 +65,22 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Gothic A1", sans-serif}
   <form class="w3-container">
     <div class="w3-row-padding">
       <div class="w3-half w3-margin-bottom">
-        <label for="base-btn">
-          <h3>Base</h3>
-        </label>
+        <h3>Base</h3>
         <div class="w3-col s3 m3 l2">
           <button id="base-btn" class="w3-button w3-circle w3-black" style="width: 60px; height: 60px; outline: none;">USD</button>
         </div>
         <div class="w3-col s9 m9 l10 w3-display-container" style="height: 60px;">
-          <input id="base-input" class="w3-input w3-large w3-display-left" type="text" value="1" min="1" required>
+          <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="text" value="1" min="1" required>
         </div>
       </div>
       <div class="w3-half w3-margin-bottom">
-        <label for="target-btn">
-          <h3>Target</h3>
-        </label>
+        <h3>Target</h3>
         <div class="w3-col s3 m3 l2">
           <button id="target-btn" class="w3-button w3-circle w3-black" style="width: 60px; height: 60px; outline: none;">NGN</button>
         </div>
         <div class="w3-col s9 m9 l10 w3-display-container" style="height: 60px;">
         <!-- <div class="w3-threequarter" onload="FreeCurrencyConverterAPI.currencies()"> -->
-          <input id="target-input" class="w3-input w3-large w3-display-left" type="text" readonly>
+          <input id="target-input" aria-label="targetInput" class="w3-input w3-large w3-display-left" type="text" readonly>
         </div>
       </div>
       <div class="w3-col">
