@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', (event) => {
   console.log('DOM fully loaded and parsed')
-  // if (!window.location.hostname === '127.0.0.1') {
-  //   window.location.replace(`${window.location.hostname}/index.html`)
-  // }
+  if (!window.location.hostname === '127.0.0.1') {
+    window.location.replace(`${window.location.hostname}/index.html`)
+  }
   window.base = 'USD'
   window.target = 'NGN'
   let amount = 1
