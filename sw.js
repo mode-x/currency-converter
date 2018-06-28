@@ -11,7 +11,7 @@ const urlsToCache = [
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'
 ]
 
-self.addEventListener('install', function(event) {
+self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(function(cache) {
@@ -22,7 +22,7 @@ self.addEventListener('install', function(event) {
 
 self.addEventListener('fetch', (event) => {
   event.respondWith(
-    caches.match(event.request).then(function (response) {
+    caches.match(event.request).then((response) => {
       return response || fetch(event.request)
         .then((response) => {
           // if (response === undefined) {
