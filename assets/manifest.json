@@ -3,7 +3,7 @@
   "short_name": "XEX",
   "theme_color": "#000000",
   "background_color": "#ffffff",
-  "display": "browser",
+  "display": "minimal-ui",
   "scope": "/currency-converter/",
   "start_url": "/currency-converter/?utm_source=a2hs",
   "description": "XEX is a handy app used for currency conversion and it works either online and offline.",
