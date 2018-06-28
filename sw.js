@@ -25,7 +25,7 @@ self.addEventListener('fetch', (event) => {
   let requestUrl = new URL(event.request.url)
   if (requestUrl.origin === location.origin) {
     if (requestUrl.pathname === '/') {
-      event.respondWith(caches.match('/skeleton'))
+      event.respondWith(caches.match('/app_shell'))
       return
     }
   }
