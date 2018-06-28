@@ -137,7 +137,7 @@ html,body,h1,h2,h3,h4,h5 {font-family: "Gothic A1", sans-serif}
 // Service Worker
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', function() {
-    navigator.serviceWorker.register('./sw.js').then(function(registration) {
+    navigator.serviceWorker.register('sw.js').then(function(registration) {
       console.log('ServiceWorker registration successful with scope: ', registration.scope)
     }, function(err) {
       console.log('ServiceWorker registration failed: ', err)
