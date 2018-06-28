@@ -1,5 +1,6 @@
 const CACHE_NAME = 'app-cache-v1'
 const urlsToCache = [
+  './index.html',
   './app_shell.html',
   'assets/css/w3.css',
   'assets/css/app.css',
