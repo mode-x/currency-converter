@@ -1,6 +1,9 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  console.log('DOM fully loaded and parsed')
-  
+
+  let amount = 1
+  window.base = 'USD'
+  window.target = 'NGN'
+
   document.getElementById('base-input').onkeypress = (e) => {
     amount = e.target.value
   }
@@ -10,33 +13,28 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
   
   document.getElementById('base-btn').onclick = (e) => {
+    e.preventDefault()
     document.getElementById('id01').style.display='block'
     window.initiatorValue = e.target.id
-    e.preventDefault()
+    const converter = new Converter(1)
+    converter.currencies()
   }
 
   document.getElementById('target-btn').onclick = (e) => {
+    e.preventDefault()
     document.getElementById('id01').style.display='block'
     window.initiatorValue = e.target.id
-    e.preventDefault()
+    const converter = new Converter(1)
+    converter.currencies()
   }
 
   document.getElementById('convert-btn').onclick = (e) => {
-    const converter = new Converter(amount, database)
-    converter.convert()
     e.preventDefault()
+    const converter = new Converter(amount)
+    converter.convert()
   }
 
 })
-
-loadList = () => {
-  window.base = 'USD'
-  window.target = 'NGN'
-  const database = new Database ()
-  const converter = new Converter(1, database)
-  converter.currencies()
-  converter.convert()
-}
 
 panels = () => {
   const sideBar = document.getElementById('mySidebar')

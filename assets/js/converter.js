@@ -1,11 +1,11 @@
-class Converter {
-  constructor (amount, database) {
+class Converter extends Database {
+  constructor (amount) {
+    super()
     this.base = window.base
     this.target = window.target
     this.first_pair = `${this.base}_${this.target}`
     this.second_pair = `${this.target}_${this.base}`
     this.amount = amount
-    this.database = database
     this.exchange_pairs = null
     this.rate = 0
   }
@@ -55,7 +55,7 @@ class Converter {
         this.exchange_pairs = pairs
         this.rate = pairs[this.first_pair]
         this.display()
-        this.database.insert({id: `${this.first_pair}/${this.second_pair}`, pairs: pairs, time: new Date().toISOString()})
+        super.insert({id: `${this.first_pair}/${this.second_pair}`, pairs: pairs, time: new Date().toISOString()})
       })
       .catch((error) => {
         console.log(error)
@@ -70,7 +70,7 @@ class Converter {
     const _secondPair = `${this.second_pair}/${this.first_pair}`
     const pairsPromise = []
     for (const pair of [_firstPair, _secondPair]) {
-      pairsPromise.push(this.database.checkPair(pair))
+      pairsPromise.push(super.checkPair(pair))
     }
     return Promise.all(pairsPromise).then((values) => {
       const result = values.filter(value => value !== undefined)
