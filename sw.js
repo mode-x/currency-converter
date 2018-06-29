@@ -6,7 +6,7 @@ const urlsToCache = [
   'assets/css/app.css',
   'assets/js/initializer.js',
   'assets/js/idb.js',
-  'assets/js/db.js',
+  'assets/js/database.js',
   'assets/js/converter.js',
   'https://fonts.googleapis.com/css?family=Gothic+A1',
   'https://fonts.googleapis.com/icon?family=Material+Icons',

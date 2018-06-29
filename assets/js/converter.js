@@ -30,12 +30,13 @@ class Converter extends Database {
             if (e.target && e.target.nodeName === 'LI') {
               const btnId = window.initiatorValue
               const value = e.target.textContent.split(',')[0]
+              const country = e.target.textContent.split(',')[1]
               document.getElementById('id01').style.display='none'
               if (btnId.split('-')[0] === 'base') {
-                document.getElementById('convert-text').innerHTML = ` Convert ${value} to ${document.getElementById('target-btn').textContent}`
+                document.getElementById('base-text').innerHTML = country
                 window.base = value
               } else if (btnId.split('-')[0] === 'target') {
-                document.getElementById('convert-text').innerHTML = ` Convert ${document.getElementById('base-btn').textContent} to ${value}`
+                document.getElementById('target-text').innerHTML = country
                 window.target = value
               }
               document.getElementById(btnId).innerText = value
@@ -92,6 +93,6 @@ class Converter extends Database {
   display () {
     document.getElementById('first-conversion-rate').innerText = `${this.first_pair.replace('_', ' => ')} = ${this.exchange_pairs[this.first_pair]}`
     document.getElementById('second-conversion-rate').innerText = `${this.second_pair.replace('_', ' => ')} = ${this.exchange_pairs[this.second_pair]}`
-    document.getElementById('target-input').value = this.rate * this.amount
+    document.getElementById('target-input').value = (this.rate * this.amount).toFixed(6)
   }
 }

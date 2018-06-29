@@ -3,14 +3,10 @@ class Database {
     this.db = this.openDatabase()
   }
 
-  // Open database
   openDatabase () {
-    // If the browser doesn't support service worker,
-    // we don't care about having a database
     if (!navigator.serviceWorker) {
       return Promise.resolve()
     }
-
     return idb.open('convert-db', 1, function(upgradeDb) {
       var store = upgradeDb.createObjectStore('exchange-rates', {
         keyPath: 'id'
@@ -37,7 +33,7 @@ class Database {
   }
 
   delete () {
-
+    // Remove pairs
   }
 
 }

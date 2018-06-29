@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   let amount = 1
   window.base = 'USD'
   window.target = 'NGN'
-
+    
   document.getElementById('base-input').onkeypress = (e) => {
     amount = e.target.value
   }
@@ -54,5 +54,5 @@ w3_open = () => {
 
 w3_close = () => {
   panels().side_bar.style.display = 'none'
-  panels().over_lay.style.display = 'none'
+  // panels().over_lay.style.display = 'none'
 }
