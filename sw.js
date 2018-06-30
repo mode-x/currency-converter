@@ -1,4 +1,4 @@
-const CACHE_NAME = 'app-cache-v1'
+const XEX_CACHE_NAME = 'xex-app-cache-v1'
 const urlsToCache = [
   './index.html',
   './app_shell.html',
@@ -15,10 +15,25 @@ const urlsToCache = [
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
+    caches.open(XEX_CACHE_NAME)
       .then(function(cache) {
         return cache.addAll(urlsToCache).catch(err => console.log(err))
       })
+  )
+})
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.filter((cacheName) => {
+          return cacheName.startsWith('xex-app-cache-') &&
+                 cacheName != XEX_CACHE_NAME
+        }).map((cacheName) => {
+          return caches.delete(cacheName)
+        })
+      )
+    })
   )
 })
 
