@@ -28,20 +28,20 @@
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="z-index:4; width:250px; display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-orange w3-hover-orange" onclick="w3_close()" style="height: 52px;">Menu &times;</button>
     <div id="last-updated" class="w3-bar-item w3-padding"></div>
-    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;">Saved Currency pairs</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;">Saved Pairs As Default</a>
     <a href="#" class="w3-bar-item w3-button w3-padding">Exchange History</a>
     <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a>
   </div>
 
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
   
+  <div class="w3-orange w3-card-4">
+    <button id="openNav" class="w3-button w3-black w3-xlarge" onclick="w3_open()">&#9776;</button>
+    <span class="w3-large w3-text-black w3-bold" style="margin-left: 10px; margin-top: 20px;">Currency Converter</span>
+  </div>
+
   <!-- !PAGE CONTENT! -->
   <div id="w3-main" style="height: auto;" onclick="w3_close()">
-    <div class="w3-orange w3-card-4">
-      <button id="openNav" class="w3-button w3-black w3-xlarge" onclick="w3_open()">&#9776;</button>
-      <span class="w3-large w3-text-black w3-bold" style="margin-left: 10px; margin-top: 20px;">Currency Converter</span>
-    </div>
-
     <div id="notify" class="w3-panel w3-red w3-display-container" style="display: none;">
       <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span>
       <h5>Error</h5>
@@ -55,17 +55,17 @@
           <form id="form" class="w3-container">
             <div class="w3-row-padding">
               <div class="w3-col">
-                <h3>Base</h3>
+                <h3 class="w3-text-orange">Base</h3>
                 <div class="w3-col s4 m3 l2" style="min-width: 80px;">
                   <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">USD</button>
                 </div>
                 <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
-                  <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" required>
+                  <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" step="0.01" required>
                 </div>
                 <h6 id="base-text" class="w3-right"></h6>
               </div>
               <div class="w3-col">
-                <h3>Target</h3>
+                <h3 class="w3-text-orange">Target</h3>
                 <div class="w3-col s4 m3 l2" style="min-width: 80px;">
                   <button id="target-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">NGN</button>
                 </div>
