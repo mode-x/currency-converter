@@ -4,16 +4,18 @@ document.addEventListener('DOMContentLoaded', (event) => {
   
   window.base = 'USD'
   window.target = 'NGN'
+
+  const baseInput = document.getElementById('base-input')
   
-  document.getElementById('base-input').onkeydown = (e) => {
+  baseInput.onkeydown = (e) => {
     document.getElementById('target-input').value = ' '
   }
 
-  document.getElementById('base-input').onkeypress = (e) => {
+  baseInput.onkeypress = (e) => {
     amount = e.target.value
   }
 
-  document.getElementById('base-input').onchange = (e) => {
+  baseInput.onchange = (e) => {
     amount = e.target.value
   }
   
@@ -45,8 +47,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   document.getElementById('convert-btn').onclick = (e) => {
     const converter = new Converter(amount)
-    if (amount) {
+    if (amount && baseInput.validity.valid) {
       converter.convert()
+    } else {
+      document.getElementById('target-input').value = ' '
     }
   }
 
