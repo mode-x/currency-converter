@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
   }
 
   document.getElementById('base-input').onchange = (e) => {
-    console.log('changes')
     amount = e.target.value
   }
   
@@ -40,10 +39,15 @@ document.addEventListener('DOMContentLoaded', (event) => {
     converter.convert()
   }
 
+  document.getElementById('form').onsubmit = (e) => {
+    e.preventDefault()
+  }
+
   document.getElementById('convert-btn').onclick = (e) => {
-    // e.preventDefault()
     const converter = new Converter(amount)
-    converter.convert()
+    if (amount) {
+      converter.convert()
+    }
   }
 
 })
