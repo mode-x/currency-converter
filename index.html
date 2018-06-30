@@ -55,9 +55,9 @@
           <form id="form" class="w3-container">
             <div class="w3-row-padding">
               <div class="w3-col">
-                <h3 class="w3-text-orange">Base</h3>
+                <h3>Base</h3>
                 <div class="w3-col s4 m3 l2" style="min-width: 80px;">
-                  <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">USD</button>
+                  <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge w3-hover-orange" style="width: 80px; height: 80px; outline: none;">USD</button>
                 </div>
                 <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
                   <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" step="0.01" required>
@@ -65,9 +65,9 @@
                 <h6 id="base-text" class="w3-right"></h6>
               </div>
               <div class="w3-col">
-                <h3 class="w3-text-orange">Target</h3>
+                <h3>Target</h3>
                 <div class="w3-col s4 m3 l2" style="min-width: 80px;">
-                  <button id="target-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">NGN</button>
+                  <button id="target-btn" class="w3-button w3-circle w3-black w3-xlarge w3-hover-orange" style="width: 80px; height: 80px; outline: none;">NGN</button>
                 </div>
                 <div class="w3-card-4">
                     <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
@@ -110,21 +110,6 @@
         <div class="w3-container" style="height: 400px; overflow-y: scroll;">
           <ul id="currency-container" class="w3-ul"></ul>
         </div>
-      </div>
-    </div>
-
-    <!-- Modal 2-->
-    <div id="default-currencies" class="w3-modal">
-      <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px;">
-        <header class="w3-container w3-black">
-          <span onclick="document.getElementById('currencies-list').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-          <h3>Default currencies</h3>
-        </header>
-        <form id="form" class="w3-container w3-card-4 w3-padding-24">
-          <div class="w3-row-padding">
-            <input id="target-input" aria-label="targetInput" class="w3-input w3-large w3-display-left" type="text" readonly>
-          </div>
-        </form>
       </div>
     </div>
   </div>
