@@ -1,4 +1,4 @@
-const XEX_CACHE_NAME = 'xex-app-cache-v1'
+const XEX_CACHE_NAME = 'xex-app-cache-v2'
 const urlsToCache = [
   './index.html',
   'app_shell/',
