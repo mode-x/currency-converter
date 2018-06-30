@@ -11,7 +11,7 @@ class Converter extends Database {
   }
 
   currencies () {
-    caches.open('app-cache-v1').then((cache) => {
+    caches.open('xex-app-cache-v1').then((cache) => {
       cache.match('https://free.currencyconverterapi.com/api/v5/currencies')
         .then((response) => {
           return response.json()
