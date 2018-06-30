@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     e.preventDefault()
     document.getElementById('currencies-list').style.display='block'
     window.initiatorValue = e.target.id
-    const converter = new Converter(1)
+    const converter = new Converter()
     converter.currencies()
   }
 
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
     e.preventDefault()
     document.getElementById('currencies-list').style.display='block'
     window.initiatorValue = e.target.id
-    const converter = new Converter(1)
+    const converter = new Converter()
     converter.currencies()
   }
 

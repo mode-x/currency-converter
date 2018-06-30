@@ -67,7 +67,15 @@ class Converter extends Database {
         })
     } else {
       document.getElementById('notify').style.display = 'block'
-      document.getElementById('notify-message').innerHTML = `The exchange rate cannot be fetch now.\nConnected to the internet and try again.`
+      document.getElementById('notify-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.`
+      // Reset to default
+      window.base = 'USD'
+      window.target = 'NGN'
+      document.getElementById('base-btn').innerHTML = 'USD'
+      document.getElementById('target-btn').innerHTML = 'NGN'
+      document.getElementById('base-text').innerHTML = 'United States Dollar'
+      document.getElementById('target-text').innerHTML = 'Nigerian Naira'
+      new Converter().convert()
     }
   }
 

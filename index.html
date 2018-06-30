@@ -30,89 +30,101 @@
     <div id="last-updated" class="w3-bar-item w3-padding"></div>
     <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;">Saved Currency pairs</a>
     <a href="#" class="w3-bar-item w3-button w3-padding">Exchange History</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a><br><br>
+    <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a>
   </div>
 
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
   
   <!-- !PAGE CONTENT! -->
-  <div id="main">
+  <div id="w3-main" style="height: auto;" onclick="w3_close()">
     <div class="w3-orange w3-card-4">
       <button id="openNav" class="w3-button w3-black w3-xlarge" onclick="w3_open()">&#9776;</button>
       <span class="w3-large w3-text-black w3-bold" style="margin-left: 10px; margin-top: 20px;">Currency Converter</span>
     </div>
-    <div class="w3-main" style="height: auto;" onclick="w3_close()">
-      <div id="notify" class="w3-panel w3-red w3-display-container" style="display: none;">
-        <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span>
-        <h5>Error</h5>
-        <p id="notify-message">error message</p>
-      </div>
 
-      <div class="w3-container w3-padding-16">
-        <div w3-row>
-          <div class="w3-hide-small w3-col l3">&nbsp;</div>
-          <div class="w3-col s12 m12 l6">
-            <form id="form" class="w3-container w3-card-4 w3-padding-24">
-              <div class="w3-row-padding">
-                <div class="w3-col">
-                  <h3>Base</h3>
-                  <div class="w3-col s4 m3 l2" style="min-width: 80px;">
-                    <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">USD</button>
-                  </div>
-                  <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
-                    <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" required>
-                  </div>
-                  <h6 id="base-text" class="w3-right"></h6>
+    <div id="notify" class="w3-panel w3-red w3-display-container" style="display: none;">
+      <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span>
+      <h5>Error</h5>
+      <p id="notify-message">error message</p>
+    </div>
+
+    <div class="w3-container w3-padding-16">
+      <div w3-row>
+        <div class="w3-hide-small w3-col l3">&nbsp;</div>
+        <div class="w3-col s12 m12 l6 w3-card-4 w3-padding-24" >
+          <form id="form" class="w3-container">
+            <div class="w3-row-padding">
+              <div class="w3-col">
+                <h3>Base</h3>
+                <div class="w3-col s4 m3 l2" style="min-width: 80px;">
+                  <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">USD</button>
                 </div>
-                <div class="w3-col">
-                  <h3>Target</h3>
-                  <div class="w3-col s4 m3 l2" style="min-width: 80px;">
-                    <button id="target-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">NGN</button>
-                  </div>
-                  <div class="w3-card-4">
-                      <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
-                          <!-- <div class="w3-threequarter" onload="FreeCurrencyConverterAPI.currencies()"> -->
-                          <input id="target-input" aria-label="targetInput" class="w3-input w3-large w3-display-left" type="text" readonly>
-                        </div>
-                  </div>
-                  
-                  <h6 id="target-text" class="w3-right"></h6>
+                <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
+                  <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" required>
                 </div>
-                <br>
-                <div class="w3-col w3-margin-bottom">
-                  <div class="w3-display-container" style="width: 100%; height: 60px;">
-                    <!-- <div class="w3-col w3-display-right"> -->
-                    <button id="convert-btn" class="w3-col s12 m3 l3 w3-button w3-text-black w3-display-right w3-padding-16 w3-orange">
-                    CONVERT</button>
-                    <!-- </div> -->
-                  </div>
-                </div>
-                <br>
-                <div class="w3-small w3-margin-bottom" style="margin-left: 10px;">
-                  <div class="w3-col"><b>Exchange Rates</b></b></div>
-                  <div id="first-conversion-rate" class="w3-col"></div>
-                  <div id="second-conversion-rate" class="w3-col"></div>
-                  </div>
+                <h6 id="base-text" class="w3-right"></h6>
               </div>
-            </form>
-            
-          </div>
-          <div class="w3-hide-small w3-col l3" >&nbsp;</div>
+              <div class="w3-col">
+                <h3>Target</h3>
+                <div class="w3-col s4 m3 l2" style="min-width: 80px;">
+                  <button id="target-btn" class="w3-button w3-circle w3-black w3-xlarge" style="width: 80px; height: 80px; outline: none;">NGN</button>
+                </div>
+                <div class="w3-card-4">
+                    <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
+                      <!-- <div class="w3-threequarter" onload="FreeCurrencyConverterAPI.currencies()"> -->
+                      <input id="target-input" aria-label="targetInput" class="w3-input w3-large w3-display-left" type="text" readonly>
+                    </div>
+                </div>
+                
+                <h6 id="target-text" class="w3-right"></h6>
+              </div>
+              <br>
+              <div class="w3-col w3-margin-bottom">
+                <div class="w3-display-container" style="width: 100%; height: 60px;">
+                  <!-- <div class="w3-col w3-display-right"> -->
+                  <button id="convert-btn" class="w3-col s12 m3 l3 w3-button w3-text-black w3-display-right w3-padding-16 w3-orange">
+                  CONVERT</button>
+                  <!-- </div> -->
+                </div>
+              </div>
+              <br>
+              <div class="w3-small w3-margin-bottom" style="margin-left: 10px;">
+                <div class="w3-col"><b>Exchange Rates</b></b></div>
+                <div id="first-conversion-rate" class="w3-col"></div>
+                <div id="second-conversion-rate" class="w3-col"></div>
+                </div>
+            </div>
+          </form>
+        </div>
+        <div class="w3-hide-small w3-col l3" >&nbsp;</div>
+      </div>
+    </div>
+
+    <!-- Modal 1-->
+    <div id="currencies-list" class="w3-modal">
+      <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px;">
+        <header class="w3-container w3-black">
+          <span onclick="document.getElementById('currencies-list').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <h3>Currencies</h3>
+        </header>
+        <div class="w3-container" style="height: 400px; overflow-y: scroll;">
+          <ul id="currency-container" class="w3-ul"></ul>
         </div>
       </div>
+    </div>
 
-      <!-- Modal 1-->
-      <div id="currencies-list" class="w3-modal">
-        <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px;">
-          <header class="w3-container w3-black">
-            <span onclick="document.getElementById('currencies-list').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h3>Currencies</h3>
-          </header>
-          <div class="w3-container" style="height: 400px; overflow-y: scroll;">
-            <ul id="currency-container" class="w3-ul">
-            </ul>
+    <!-- Modal 2-->
+    <div id="default-currencies" class="w3-modal">
+      <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px;">
+        <header class="w3-container w3-black">
+          <span onclick="document.getElementById('currencies-list').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <h3>Default currencies</h3>
+        </header>
+        <form id="form" class="w3-container w3-card-4 w3-padding-24">
+          <div class="w3-row-padding">
+            <input id="target-input" aria-label="targetInput" class="w3-input w3-large w3-display-left" type="text" readonly>
           </div>
-        </div>
+        </form>
       </div>
     </div>
   </div>
@@ -130,26 +142,14 @@
       })
     }
   </script>
-  <script async>
+  <script>
     init = () => {
       // Set the default display currency pairs
       document.getElementById('base-text').innerHTML = 'United States Dollar'
       document.getElementById('target-text').innerHTML = 'Nigerian Naira'
       // Create new converter object
-      new Converter().convert()
       // Conversion for the default currencies
-     }
-
-    lastUpdate = () => {
-      // Get time of last update
-      window.converter.lastUpdate().then((records) => {
-        const dates = []
-        for (const record of records) {
-          dates.push(record.time)
-        }
-        const last_update = dates.sort().pop()
-        document.getElementById('last-updated').innerHTML = `Last Update: ${last_update}`
-      })
+      new Converter().convert()
     }
   </script>
 
