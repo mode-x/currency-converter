@@ -113,5 +113,4 @@ class Converter extends Database {
     document.getElementById('second-conversion-rate').innerText = `${this.second_pair.replace('_', ' => ')} = ${this.exchange_pairs[this.second_pair]}`
     document.getElementById('target-input').value = (this.rate * this.amount).toFixed(6)
   }
-
 }
