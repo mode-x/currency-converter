@@ -1,20 +1,26 @@
 document.addEventListener('DOMContentLoaded', (event) => {
 
   let amount = 1
+  
   window.base = 'USD'
   window.target = 'NGN'
-    
+  
+  document.getElementById('base-input').onkeydown = (e) => {
+    document.getElementById('target-input').value = ' '
+  }
+
   document.getElementById('base-input').onkeypress = (e) => {
     amount = e.target.value
   }
 
   document.getElementById('base-input').onchange = (e) => {
+    console.log('changes')
     amount = e.target.value
   }
   
   document.getElementById('base-btn').onclick = (e) => {
     e.preventDefault()
-    document.getElementById('id01').style.display='block'
+    document.getElementById('currencies-list').style.display='block'
     window.initiatorValue = e.target.id
     const converter = new Converter(1)
     converter.currencies()
@@ -22,7 +28,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   document.getElementById('target-btn').onclick = (e) => {
     e.preventDefault()
-    document.getElementById('id01').style.display='block'
+    document.getElementById('currencies-list').style.display='block'
     window.initiatorValue = e.target.id
     const converter = new Converter(1)
     converter.currencies()
@@ -30,6 +36,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
   document.getElementById('convert-btn').onclick = (e) => {
     e.preventDefault()
+    const converter = new Converter(amount)
+    converter.convert()
+  }
+
+  document.getElementById('convert-btn').onclick = (e) => {
+    // e.preventDefault()
     const converter = new Converter(amount)
     converter.convert()
   }
@@ -54,5 +66,5 @@ w3_open = () => {
 
 w3_close = () => {
   panels().side_bar.style.display = 'none'
-  // panels().over_lay.style.display = 'none'
+  panels().over_lay.style.display = 'none'
 }
