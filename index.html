@@ -16,14 +16,14 @@
 <meta name="theme-color" content="#000000">
 <link rel="dns-prefetch" href="https://free.currencyconverterapi.com">
 <link rel="manifest" href="assets/manifest.json">
-<script src="assets/js/initializer.js"></script>
 <script src="assets/js/idb.js" async></script>
-<script src="assets/js/database.js" async></script>
-<script src="assets/js/converter.js" async></script>
+<script src="assets/js/database.js"></script>
+<script src="assets/js/converter.js"></script>
+<script src="assets/js/initializer.js"></script>
 <link rel="stylesheet" href="assets/css/w3.css">
 <link rel="stylesheet" href="assets/css/app.css">
 
-<body onload="init()">
+<body>
   <!-- Sidebar/menu -->
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="z-index:4; width:250px; display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-orange w3-hover-orange" onclick="w3_close()" style="height: 52px;">Menu &times;</button>
@@ -58,7 +58,7 @@
                   <button id="base-btn" class="w3-button w3-circle w3-black w3-xlarge w3-hover-orange" style="width: 80px; height: 80px; outline: none;">USD</button>
                 </div>
                 <div class="w3-col s8 m9 l10 w3-display-container" style="height: 80px;">
-                  <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" min="1" step="0.01" required>
+                  <input id="base-input" aria-label="baseInput" class="w3-input w3-large w3-display-left" type="number" value="1" step="0.01" required>
                 </div>
                 <h6 id="base-text" class="w3-right"></h6>
               </div>
@@ -138,11 +138,12 @@
 
   <script>
     // Service Worker
+    new Initializer()
     if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function () {
-        navigator.serviceWorker.register('sw.js').then(function (registration) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('sw.js').then((registration) => {
           console.log('ServiceWorker registration successful with scope: ', registration.scope)
-        }, function (err) {
+        }, (err) => {
           console.log('ServiceWorker registration failed: ', err)
         })
       })
@@ -150,28 +151,48 @@
   </script>
 
   <script>
-    init = () => {
-      // Set the default display currency pairs
-      const converter = new Converter()
-      converter.getPair().then((response) => {
-        if (response.length > 0) {
-          window.base = response[0].pair.base_id
-          window.target = response[0].pair.target_id
-          document.getElementById('base-btn').innerText = response[0].pair.base_id
-          document.getElementById('target-btn').innerText = response[0].pair.target_id
-          document.getElementById('base-text').innerHTML = response[0].pair.base_name
-          document.getElementById('target-text').innerHTML = response[0].pair.target_name
-        } else {
-          window.base = 'USD'
-          window.target = 'NGN'
-          document.getElementById('base-btn').innerText = 'USD'
-          document.getElementById('target-btn').innerText = 'NGN'
-          document.getElementById('base-text').innerHTML = 'United States Dollar'
-          document.getElementById('target-text').innerHTML = 'Nigerian Naira'
-        }
-        new Converter().convert()
-      })
+    panels = () => {
+      const sideBar = document.getElementById('mySidebar')
+      const overLay = document.getElementById('myOverlay')
+      return {side_bar: sideBar, over_lay: overLay}
     }
+    
+    w3_open = () => {
+      if (panels().side_bar.style.display === 'block') {
+        panels().side_bar.style.display = 'none'
+        panels().over_lay.style.display = 'none'
+      } else {
+        panels().side_bar.style.display = 'block'
+        panels().over_lay.style.display = 'block'
+      }
+    }
+    
+    w3_close = () => {
+      panels().side_bar.style.display = 'none'
+      panels().over_lay.style.display = 'none'
+    }
+    
+    openSaveDefault = () => {
+      document.getElementById('info-dialog').style.display='block'
+      document.getElementById('info-message').innerHTML = 'Do you want to save this pair as default?'
+      w3_close()
+    }
+    
+    saveDefault = () => {
+      const baseCurrencyName = document.getElementById('base-text').innerHTML
+      const targetCurrencyName = document.getElementById('target-text').innerHTML
+      const converter = new Converter()
+      document.getElementById('info-dialog').style.display='none'
+      converter.insertDefault({base_id: document.getElementById('base-btn').innerText, base_name: baseCurrencyName, target_id: document.getElementById('target-btn').innerText, target_name: targetCurrencyName})
+      converter.getPair().then((response) => {
+        document.getElementById('base-btn').innerText = response[0].pair.base_id
+        document.getElementById('target-btn').innerText = response[0].pair.target_id
+        document.getElementById('base-text').innerHTML = response[0].pair.base_name
+        document.getElementById('target-text').innerHTML = response[0].pair.target_name
+      })
+      window.location.reload()
+    }
+
   </script>
 
 </body>

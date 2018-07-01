@@ -1,8 +1,8 @@
 class Converter extends Database {
-  constructor (amount = 1) {
+  constructor (base, target, amount = 1) {
     super()
-    this.base = window.base
-    this.target = window.target
+    this.base = base
+    this.target = target
     this.first_pair = `${this.base}_${this.target}`
     this.second_pair = `${this.target}_${this.base}`
     this.amount = amount
@@ -80,6 +80,8 @@ class Converter extends Database {
   }
 
   convert () {
+    console.log(this.base)
+    console.log(this.target)
     if (!this.base || !this.target) {
       document.getElementById('error-dialog').style.display = 'block'
       document.getElementById('error-message').innerHTML = 'From and To initiators are undefined'

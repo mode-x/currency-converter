@@ -1,94 +1,77 @@
-document.addEventListener('DOMContentLoaded', (event) => {
-
-  let amount = 1
-  
-  const baseInput = document.getElementById('base-input')
-  
-  baseInput.onkeydown = (e) => {
-    document.getElementById('target-input').value = ' '
+class Initializer extends Converter {
+  constructor () {
+    super()
+    // Set the default display currency pairs
+    this.getPair().then((response) => {
+      if (response.length > 0) {
+        this.base = response[0].pair.base_id
+        this.target = response[0].pair.target_id
+        document.getElementById('base-btn').innerText = response[0].pair.base_id
+        document.getElementById('target-btn').innerText = response[0].pair.target_id
+        document.getElementById('base-text').innerHTML = response[0].pair.base_name
+        document.getElementById('target-text').innerHTML = response[0].pair.target_name
+      } else {
+        this.base = 'USD'
+        this.target = 'NGN'
+        document.getElementById('base-btn').innerText = 'USD'
+        document.getElementById('target-btn').innerText = 'NGN'
+        document.getElementById('base-text').innerHTML = 'United States Dollar'
+        document.getElementById('target-text').innerHTML = 'Nigerian Naira'
+      }
+      this.first_pair = `${this.base}_${this.target}`
+      this.second_pair = `${this.target}_${this.base}`
+      this.convert()
+    })
+   
+    document.addEventListener('DOMContentLoaded', (event) => {
+      
+      const baseInput = document.getElementById('base-input')
+      
+      baseInput.onkeydown = (e) => {
+        document.getElementById('target-input').value = ' '
+      }
+    
+      baseInput.onkeypress = (e) => {
+        this.amount = e.target.value
+      }
+    
+      baseInput.onchange = (e) => {
+        this.amount = e.target.value
+      }
+      
+      document.getElementById('base-btn').onclick = (e) => {
+        e.preventDefault()
+        document.getElementById('currencies-list').style.display='block'
+        window.initiatorValue = e.target.id
+        const converter = new Converter()
+        converter.currencies()
+      }
+    
+      document.getElementById('target-btn').onclick = (e) => {
+        e.preventDefault()
+        document.getElementById('currencies-list').style.display='block'
+        window.initiatorValue = e.target.id
+        const converter = new Converter()
+        converter.currencies()
+      }
+    
+      document.getElementById('form').onsubmit = (e) => {
+        e.preventDefault()
+      }
+    
+      document.getElementById('convert-btn').onclick = (e) => {
+        const base = document.getElementById('base-btn').innerText
+        const target = document.getElementById('target-btn').innerText
+        const converter = new Converter(base, target, this.amount)
+        if (this.amount && baseInput.validity.valid) {
+          converter.convert()
+        } else {
+          document.getElementById('target-input').value = ' '
+        }
+      }
+    
+    })
   }
 
-  baseInput.onkeypress = (e) => {
-    amount = e.target.value
-  }
-
-  baseInput.onchange = (e) => {
-    amount = e.target.value
-  }
-  
-  document.getElementById('base-btn').onclick = (e) => {
-    e.preventDefault()
-    document.getElementById('currencies-list').style.display='block'
-    window.initiatorValue = e.target.id
-    const converter = new Converter()
-    converter.currencies()
-  }
-
-  document.getElementById('target-btn').onclick = (e) => {
-    e.preventDefault()
-    document.getElementById('currencies-list').style.display='block'
-    window.initiatorValue = e.target.id
-    const converter = new Converter()
-    converter.currencies()
-  }
-
-  document.getElementById('form').onsubmit = (e) => {
-    e.preventDefault()
-  }
-
-  document.getElementById('convert-btn').onclick = (e) => {
-    const converter = new Converter(amount)
-    if (amount && baseInput.validity.valid) {
-      converter.convert()
-    } else {
-      document.getElementById('target-input').value = ' '
-    }
-  }
-
-})
-
-panels = () => {
-  const sideBar = document.getElementById('mySidebar')
-  const overLay = document.getElementById('myOverlay')
-  return {side_bar: sideBar, over_lay: overLay}
-}
-
-w3_open = () => {
-  if (panels().side_bar.style.display === 'block') {
-    panels().side_bar.style.display = 'none'
-    panels().over_lay.style.display = 'none'
-  } else {
-    panels().side_bar.style.display = 'block'
-    panels().over_lay.style.display = 'block'
-  }
-}
-
-w3_close = () => {
-  panels().side_bar.style.display = 'none'
-  panels().over_lay.style.display = 'none'
-}
-
-openSaveDefault = () => {
-  document.getElementById('info-dialog').style.display='block'
-  document.getElementById('info-message').innerHTML = 'Do you want to save this pair as default?'
-  w3_close()
-}
-
-saveDefault = () => {
-  const baseCurrenyName = document.getElementById('base-text').innerHTML
-  const targetCurrenyName = document.getElementById('target-text').innerHTML
-  const converter = new Converter()
-  converter.insertDefault({base_id: window.base, base_name: baseCurrenyName, target_id: window.target, target_name: targetCurrenyName})
-  document.getElementById('info-dialog').style.display='none'
-  
-  converter.getPair().then((response) => {
-    window.base = response[0].pair.base_id
-    window.target = response[0].pair.target_id
-    document.getElementById('base-btn').innerText = response[0].pair.base_id
-    document.getElementById('target-btn').innerText = response[0].pair.target_id
-    document.getElementById('base-text').innerHTML = response[0].pair.base_name
-    document.getElementById('target-text').innerHTML = response[0].pair.target_name
-  })
-  window.location.reload()
 }
 
