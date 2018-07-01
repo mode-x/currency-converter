@@ -64,7 +64,7 @@ class Converter extends Database {
         .catch((error) => {
           console.log(error)
           document.getElementById('error-dialog').style.display = 'block'
-          document.getElementById('error-message').innerHTML = 'Something went wrong'
+          document.getElementById('error-message').innerHTML = `Something went wrong.\nAPI limit exceeded.`
         })
     } else {
       document.getElementById('error-dialog').style.display = 'block'
