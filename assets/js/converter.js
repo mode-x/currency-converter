@@ -36,6 +36,7 @@ class Converter extends Database {
               document.getElementById('base-text').innerHTML = currencyName
               window.base = value
             } else if (btnId.split('-')[0] === 'target') {
+              document.getElementById('base-input').value = '1'
               document.getElementById('target-input').value = ' '
               document.getElementById('target-text').innerHTML = currencyName
               window.target = value

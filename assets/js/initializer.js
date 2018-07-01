@@ -60,6 +60,9 @@ class Initializer extends Converter {
       }
     
       document.getElementById('convert-btn').onclick = (e) => {
+        if (document.getElementById('base-input').value === '1') {
+          this.amount = 1
+        }
         const base = document.getElementById('base-btn').innerText
         const target = document.getElementById('target-btn').innerText
         const converter = new Converter(base, target, this.amount)
