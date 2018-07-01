@@ -173,9 +173,14 @@
     }
     
     openSaveDefault = () => {
-      document.getElementById('info-dialog').style.display='block'
-      document.getElementById('info-message').innerHTML = 'Do you want to save this pair as default?'
-      w3_close()
+      if (navigator.onLine) {
+        document.getElementById('info-dialog').style.display='block'
+        document.getElementById('info-message').innerHTML = 'Do you want to save this pair as default?'
+        w3_close()
+      } else {
+        document.getElementById('error-dialog').style.display = 'block'
+        document.getElementById('error-message').innerHTML = 'You must be online to perform this task.'
+      }
     }
     
     saveDefault = () => {
