@@ -67,7 +67,7 @@ class Converter extends Database {
         })
     } else {
       document.getElementById('error-dialog').style.display = 'block'
-      document.getElementById('error-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.\nReverting to default.`
+      document.getElementById('error-message').innerHTML = `The exchange rate cannot be fetched now.\nConnect to the internet and try again.\nReverting to default.`
       // Reset to default
       window.base = 'USD'
       window.target = 'NGN'
