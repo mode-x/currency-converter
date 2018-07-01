@@ -66,7 +66,6 @@ class Converter extends Database {
           document.getElementById('error-message').innerHTML = 'Something went wrong'
         })
     } else {
-      console.log("hi")
       document.getElementById('error-dialog').style.display = 'block'
       document.getElementById('error-message').innerHTML = `The exchange rate cannot be fetched now.\nConnect to the internet and try again.\nReverting to default.`
       // Reset to default
@@ -75,8 +74,6 @@ class Converter extends Database {
   }
 
   convert () {
-    console.log(this.base)
-    console.log(this.target)
     if (!this.base || !this.target) {
       document.getElementById('error-dialog').style.display = 'block'
       document.getElementById('error-message').innerHTML = 'From and To initiators are undefined'
