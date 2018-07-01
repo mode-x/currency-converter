@@ -66,16 +66,11 @@ class Converter extends Database {
           document.getElementById('error-message').innerHTML = 'Something went wrong'
         })
     } else {
+      console.log("hi")
       document.getElementById('error-dialog').style.display = 'block'
       document.getElementById('error-message').innerHTML = `The exchange rate cannot be fetched now.\nConnect to the internet and try again.\nReverting to default.`
       // Reset to default
-      window.base = 'USD'
-      window.target = 'NGN'
-      document.getElementById('base-btn').innerHTML = 'USD'
-      document.getElementById('target-btn').innerHTML = 'NGN'
-      document.getElementById('base-text').innerHTML = 'United States Dollar'
-      document.getElementById('target-text').innerHTML = 'Nigerian Naira'
-      new Converter().convert()
+      new Initializer()
     }
   }
 
