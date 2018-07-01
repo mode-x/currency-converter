@@ -106,6 +106,8 @@ class Converter extends Database {
         const dataTime = result[0].time
         const timeDiff = (currTime - dataTime) / 3600000
         if ((timeDiff) > 1 && navigator.onLine) {
+          document.getElementById('info-dialog').style.display = 'block'
+          document.getElementById('info-message').innerHTML = 'Updated exchange rate'
           this.fetchRateAndStore()
         } else {
           this.rate = result[0].pairs[this.first_pair]
