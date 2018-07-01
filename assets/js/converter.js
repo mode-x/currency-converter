@@ -67,7 +67,7 @@ class Converter extends Database {
         })
     } else {
       document.getElementById('notify').style.display = 'block'
-      document.getElementById('notify-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.`
+      document.getElementById('notify-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.\nReverting to default.`
       // Reset to default
       window.base = 'USD'
       window.target = 'NGN'
@@ -80,6 +80,11 @@ class Converter extends Database {
   }
 
   convert () {
+    if (!this.base || !this.target) {
+      document.getElementById('notify').style.display = 'block'
+      document.getElementById('notify-message').innerHTML = 'From and To initiators are undefined'
+      return
+    }
     const _firstPair = `${this.first_pair}/${this.second_pair}`
     const _secondPair = `${this.second_pair}/${this.first_pair}`
     const pairsPromise = []

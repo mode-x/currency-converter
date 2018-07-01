@@ -23,19 +23,20 @@
 <link rel="stylesheet" href="assets/css/w3.css">
 <link rel="stylesheet" href="assets/css/app.css">
 
-
 <body onload="init()">
   <!-- Sidebar/menu -->
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="z-index:4; width:250px; display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-orange w3-hover-orange" onclick="w3_close()" style="height: 52px;">Menu &times;</button>
     <div id="last-updated" class="w3-bar-item w3-padding"></div>
-    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;">Saved Pairs As Default</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding">Exchange History</a>
-    <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;" onclick="closeSaveDefault()">Save Pairs As Default</a>
+    <!-- <a href="#" class="w3-bar-item w3-button w3-padding">Exchange History</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a> -->
   </div>
 
+  <!-- !OVERLAY! -->
   <div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_close()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
   
+  <!-- !HEADER! -->
   <div class="w3-orange w3-card-4">
     <button id="openNav" class="w3-button w3-black w3-xlarge" onclick="w3_open()">&#9776;</button>
     <span class="w3-large w3-text-black w3-bold" style="margin-left: 10px; margin-top: 20px;">Currency Converter</span>
@@ -43,15 +44,17 @@
 
   <!-- !PAGE CONTENT! -->
   <div id="w3-main" style="height: auto;" onclick="w3_close()">
+    <!-- !ALERT! -->
     <div id="notify" class="w3-panel w3-red w3-display-container" style="display: none;">
       <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span>
       <h5>Error</h5>
       <p id="notify-message">error message</p>
     </div>
-
+    <!-- !MAIN! -->
     <div class="w3-container w3-padding-16">
       <div w3-row>
         <div class="w3-hide-small w3-col l3">&nbsp;</div>
+        <!--Conversion -->
         <div class="w3-col s12 m12 l6 w3-card-4 w3-padding-24" >
           <form id="form" class="w3-container">
             <div class="w3-row-padding">
@@ -106,13 +109,25 @@
       <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px;">
         <header class="w3-container w3-black">
           <span onclick="document.getElementById('currencies-list').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-          <h3>Currencies</h3>
+          <h4>Currencies</h4>
         </header>
         <div class="w3-container" style="height: 400px; overflow-y: scroll;">
           <ul id="currency-container" class="w3-ul"></ul>
         </div>
       </div>
     </div>
+
+    <!-- Modal 2-->
+    <div id="save-as-default" class="w3-modal" style="z-index:5;">
+        <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px; height: 200px; margin-top: 100px;">
+          <header class="w3-container w3-black">
+            <span onclick="document.getElementById('save-as-default').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+            <h4>Default currencies pair</h4>
+          </header>
+          <p id="save-as-default-message" style="padding-left: 30px; margin-top: 30px;">Do you want to save this pair as default?</p>
+          <input class="w3-button w3-black w3-display-bottomright" style="margin-right: 30px; margin-bottom: 30px;" type="button" value="Save" onclick="saveDefault()">
+        </div>
+      </div>
   </div>
   <!-- End page content -->
 
@@ -128,14 +143,29 @@
       })
     }
   </script>
+
   <script>
     init = () => {
       // Set the default display currency pairs
-      document.getElementById('base-text').innerHTML = 'United States Dollar'
-      document.getElementById('target-text').innerHTML = 'Nigerian Naira'
-      // Create new converter object
-      // Conversion for the default currencies
-      new Converter().convert()
+      const converter = new Converter()
+      converter.getPair().then((response) => {
+        if (response.length > 0) {
+          window.base = response[0].pair.base_id
+          window.target = response[0].pair.target_id
+          document.getElementById('base-btn').innerText = response[0].pair.base_id
+          document.getElementById('target-btn').innerText = response[0].pair.target_id
+          document.getElementById('base-text').innerHTML = response[0].pair.base_name
+          document.getElementById('target-text').innerHTML = response[0].pair.target_name
+        } else {
+          window.base = 'USD'
+          window.target = 'NGN'
+          document.getElementById('base-btn').innerText = 'USD'
+          document.getElementById('target-btn').innerText = 'NGN'
+          document.getElementById('base-text').innerHTML = 'United States Dollar'
+          document.getElementById('target-text').innerHTML = 'Nigerian Naira'
+        }
+        new Converter().convert()
+      })
     }
   </script>
 
