@@ -50,7 +50,7 @@ class Converter extends Database {
   fetchRateAndStore () {
     if (navigator.onLine) {
       const url = `https://free.currencyconverterapi.com/api/v5/convert?q=${this.first_pair},${this.second_pair}&compact=ultra`
-      fetch(url)
+      fetch(url, {mode: 'no-cors'})
         .then((response) => {
           return response.json()
         })
