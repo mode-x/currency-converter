@@ -13,3 +13,9 @@ input:valid {
 #target-input {
   border: 1px solid black;
 }
+
+#error-message, #info-message {
+  color: black;
+  opacity: 0.8;
+  padding: 20px;
+}

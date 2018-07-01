@@ -32,12 +32,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     converter.currencies()
   }
 
-  // document.getElementById('convert-btn').onclick = (e) => {
-  //   e.preventDefault()
-  //   const converter = new Converter(amount)
-  //   converter.convert()
-  // }
-
   document.getElementById('form').onsubmit = (e) => {
     e.preventDefault()
   }
@@ -74,8 +68,9 @@ w3_close = () => {
   panels().over_lay.style.display = 'none'
 }
 
-closeSaveDefault = () => {
-  document.getElementById('save-as-default').style.display='block'
+openSaveDefault = () => {
+  document.getElementById('info-dialog').style.display='block'
+  document.getElementById('info-message').innerHTML = 'Do you want to save this pair as default?'
   w3_close()
 }
 
@@ -84,7 +79,7 @@ saveDefault = () => {
   const targetCurrenyName = document.getElementById('target-text').innerHTML
   const converter = new Converter()
   converter.insertDefault({base_id: window.base, base_name: baseCurrenyName, target_id: window.target, target_name: targetCurrenyName})
-  document.getElementById('save-as-default').style.display='none'
+  document.getElementById('info-dialog').style.display='none'
   
   converter.getPair().then((response) => {
     window.base = response[0].pair.base_id

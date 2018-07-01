@@ -62,12 +62,12 @@ class Converter extends Database {
         })
         .catch((error) => {
           console.log(error)
-          document.getElementById('notify').style.display = 'block'
-          document.getElementById('notify-message').innerHTML = 'Something went wrong'
+          document.getElementById('error-dialog').style.display = 'block'
+          document.getElementById('error-message').innerHTML = 'Something went wrong'
         })
     } else {
-      document.getElementById('notify').style.display = 'block'
-      document.getElementById('notify-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.\nReverting to default.`
+      document.getElementById('error-dialog').style.display = 'block'
+      document.getElementById('error-message').innerHTML = `The exchange rate cannot be fetched now.\nConnected to the internet and try again.\nReverting to default.`
       // Reset to default
       window.base = 'USD'
       window.target = 'NGN'
@@ -81,8 +81,8 @@ class Converter extends Database {
 
   convert () {
     if (!this.base || !this.target) {
-      document.getElementById('notify').style.display = 'block'
-      document.getElementById('notify-message').innerHTML = 'From and To initiators are undefined'
+      document.getElementById('error-dialog').style.display = 'block'
+      document.getElementById('error-message').innerHTML = 'From and To initiators are undefined'
       return
     }
     const _firstPair = `${this.first_pair}/${this.second_pair}`

@@ -28,7 +28,7 @@
   <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" style="z-index:4; width:250px; display:none" id="mySidebar">
     <button class="w3-bar-item w3-button w3-large w3-orange w3-hover-orange" onclick="w3_close()" style="height: 52px;">Menu &times;</button>
     <div id="last-updated" class="w3-bar-item w3-padding"></div>
-    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;" onclick="closeSaveDefault()">Save Pairs As Default</a>
+    <a href="#" class="w3-bar-item w3-button w3-padding" style="margin-top: 30px;" onclick="openSaveDefault()">Save Pairs As Default</a>
     <!-- <a href="#" class="w3-bar-item w3-button w3-padding">Exchange History</a>
     <a href="#" class="w3-bar-item w3-button w3-padding">Settings</a> -->
   </div>
@@ -44,12 +44,6 @@
 
   <!-- !PAGE CONTENT! -->
   <div id="w3-main" style="height: auto;" onclick="w3_close()">
-    <!-- !ALERT! -->
-    <div id="notify" class="w3-panel w3-red w3-display-container" style="display: none;">
-      <span onclick="this.parentElement.style.display='none'" class="w3-button w3-red w3-large w3-display-topright">&times;</span>
-      <h5>Error</h5>
-      <p id="notify-message">error message</p>
-    </div>
     <!-- !MAIN! -->
     <div class="w3-container w3-padding-16">
       <div w3-row>
@@ -118,16 +112,27 @@
     </div>
 
     <!-- Modal 2-->
-    <div id="save-as-default" class="w3-modal" style="z-index:5;">
-        <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px; height: 200px; margin-top: 100px;">
-          <header class="w3-container w3-black">
-            <span onclick="document.getElementById('save-as-default').style.display='none'" class="w3-button w3-display-topright">&times;</span>
-            <h4>Default currencies pair</h4>
-          </header>
-          <p id="save-as-default-message" style="padding-left: 30px; margin-top: 30px;">Do you want to save this pair as default?</p>
-          <input class="w3-button w3-black w3-display-bottomright" style="margin-right: 30px; margin-bottom: 30px;" type="button" value="Save" onclick="saveDefault()">
-        </div>
+    <div id="info-dialog" class="w3-modal" style="z-index:5;">
+      <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px; height: 200px; margin-top: 100px;">
+        <header class="w3-container w3-blue">
+          <span onclick="document.getElementById('info-dialog').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <h5>Info</h5>
+        </header>
+        <p id="info-message" style="padding: 20px;"></p>
+        <input class="w3-button w3-orange w3-display-bottomright" style="margin-right: 30px; margin-bottom: 20px;" type="button" value="Save" onclick="saveDefault()">
       </div>
+    </div>
+
+    <!-- Modal 3-->
+    <div id="error-dialog" class="w3-modal" style="z-index:5;">
+      <div class="w3-modal-content w3-animate-opacity w3-card-4" style="width: 400px; height: 200px; margin-top: 100px;">
+        <header class="w3-container w3-red">
+          <span onclick="document.getElementById('error-dialog').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+          <h5>Error</h5>
+        </header>
+        <p id="error-message"></p>
+      </div>
+    </div>
   </div>
   <!-- End page content -->
 
